@@ -1,4 +1,4 @@
 stubAS:
-	python3 getStubAS.py > stubAS.json
+	python3 src/getStubAS.py > output/stubAS.json
 prependingAS:
-	python3 gestASdoingPrepending.py > outputASprepending.txt
+	python3 src/getASdoingPrepending.py > output/outputASprepending.txt

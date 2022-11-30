@@ -8,7 +8,7 @@ column = df['prepend_count'] / df['route_count']
 print(df)
 print(column)
 
-df2 = pd.read_csv('src/output/prepend_proportion_route-views.eqix_2002_2022.csv')
+df2 = pd.read_csv('src/output/prepend_proportion_rrc00_2000_2022.csv')
 row2 = df2['year']
 column2 = df2['prepend_count'] / df2['route_count']
 print(df2)

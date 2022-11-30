@@ -1,0 +1,19 @@
+{
+  "data": {
+    "asn": {
+      "cone": {
+        "numberAsns": 1,
+        "numberPrefixes": 57,
+        "numberAddresses": 14592
+      },
+      "asnDegree": {
+        "provider": 51,
+        "peer": 17,
+        "customer": 0,
+        "total": 68,
+        "transit": 0,
+        "sibling": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+Partie générale :
+
+- Checker longueur as path prepenpending 
+- Séparer IPV4 IPV6 ?
+- Checker plusieurs collectors ? rrc00
+- Checker only ases avec minimum 2 providers.
+
+Partie spécifique:
+
+- Trouver un/plusieurs stub as sympa(s) à analyser.
+
+Pour le rapport :
+- Print jolis graphes
+- Types de traffic engineering qui existent
+    => Trouver une bonne référence
+    => Expliquer pourquoi prepending
+- Décrire méthodologie pour filtrer données 
+    => How to detect stub ases
+    => Keep only > 2 providers
+    => ...

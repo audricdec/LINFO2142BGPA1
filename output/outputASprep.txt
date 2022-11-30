@@ -1,0 +1,44 @@
+2012
+Total routes: 5099788
+Total prepend: 497032
+
+2013
+Total routes: 6576419
+Total prepend: 670866
+
+2014
+Total routes: 7262000
+Total prepend: 718419
+
+2015
+Total routes: 6555708
+Total prepend: 655609
+
+2016
+Total routes: 7526639
+Total prepend: 771321
+
+2017
+Total routes: 8237780
+Total prepend: 848164
+
+2018
+Total routes: 10594045
+Total prepend: 1098317
+
+2019
+Total routes: 10788005
+Total prepend: 1172528
+
+2020
+Total routes: 13381370
+Total prepend: 1538480
+
+2021
+Total routes: 18118692
+Total prepend: 1999019
+
+2022
+Total routes: 17890276
+Total prepend: 1922340
+

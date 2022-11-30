@@ -65,7 +65,7 @@ encoder = json.JSONEncoder()
 ## Main code
 ######################################################################
 def main():
-    query = AsnQuery(42881)
+    query = AsnQuery(63293)
     request = requests.post(URL,json={'query':query})
     if request.status_code == 200:
         print (request.json())

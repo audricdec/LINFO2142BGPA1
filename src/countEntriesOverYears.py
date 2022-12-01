@@ -45,10 +45,6 @@ for year in range(start_year, end_year+1):
             print(f'{route_count} entries have been processed')
 
     results[str(year)] ={"Total routes": route_count, "Total prepend": route_prepend}
-    #fh.write(str(year)+"\n")
-    #fh.write(f'Total routes: {route_count}\n')
-    #fh.write(f'Total prepend: {route_prepend}\n')
-    #fh.write("\n")
     writer.writerow([year, route_count, route_prepend])
 
 

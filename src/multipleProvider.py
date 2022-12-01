@@ -2,15 +2,14 @@
 import pybgpstream
 import csv
 
-start_year = 2000
-end_year = 2000
+start_year = 2002
+end_year = 2022
 day_time_string_1 = "-08-31 07:00:00"
-day_time_string_2 = "-08-31 18:00:00"
+day_time_string_2 = "-08-31 09:00:00"
 collector = "rrc00"
 recordType = "ribs"
 
-f = open("/Users/audricdeckers/Desktop/LINFO2142 - Computer Networks/LINFO2142BGPA1/src/output/multiple_provider_" \
-+collector+"_"+str(start_year)+"_"+str(end_year)+".csv","w")
+f = open("output/multiple_provider_" +collector+"_"+str(start_year)+"_"+str(end_year)+".csv","w")
 writer = csv.writer(f)
 header = ['year', 'as_count', 'prepend_count']
 writer.writerow(header)
@@ -25,10 +24,12 @@ for year in range(start_year, end_year+1):
         collectors=[collector],
         record_type=recordType,
     )
+
     as_list = {}
-    as_prepend_set = set()
+    entries_count = 0
 
     for elem in stream:
+        entries_count += 1
         as_path = elem.fields["as-path"].split(" ")
 
         if len(as_path) > 1:
@@ -47,18 +48,21 @@ for year in range(start_year, end_year+1):
             provider_found = False
 
             #We look for the provider
-            while i < 0 and not provider_found:
+            while i >= 0 and not provider_found:
                 if as_path[i] != as_number:
                     provider_found = True
                     as_list[as_number]['provider'].add(as_path[i])
 
                 i -= 1
+        
+        if (entries_count % 100000) == 0 :
+            print(f'{entries_count} entries have been processed')
 
     as_count = 0
     as_prepend_count = 0
 
     for as_number, as_info in as_list.items():
-        if len(as_info['provider']) > 2:
+        if len(as_info['provider']) >= 2:
             as_count += 1
 
             if as_info['prepend']:

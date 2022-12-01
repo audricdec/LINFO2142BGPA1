@@ -14,13 +14,20 @@ column2 = df2['prepend_count'] / df2['route_count']
 print(df2)
 print(column2)
 
+# def smooth(y, box_pts):
+#     box = np.ones(box_pts)/box_pts
+#     y_smooth = np.convolve(y, box, mode='same')
+#     return y_smooth
+
 plt.figure(figsize=(10,8))
 plt.style.use('seaborn-whitegrid')
 plt.title('Proportion of STUB ASes doing prepending between 2002 and 2022',fontsize = 16)
 plt.xlabel('Years',fontsize = 12)
 plt.ylabel('Proportion of prepending',fontsize = 12)
-plt.plot(row,column,label = 'route-views.eqix')
-plt.plot(row2,column2,label = 'rrc00')
+# plt.plot(row,smooth(column,3),label = 'route-views.eqix', marker='o')
+# plt.plot(row2,smooth(column2,3),label = 'rrc00', marker='o')
+plt.plot(row,column,label = 'route-views.eqix', marker='o')
+plt.plot(row2,column2,label = 'rrc00', marker='o')
 plt.legend()
 plt.savefig('prepending.png',dpi = 100,format='png')
 plt.show()

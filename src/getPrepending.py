@@ -5,10 +5,10 @@ import csv
 # 17800000 have been processed IPV4 & IPV6 "2022-08-31 07:50:00", until_time="2022-08-31 08:10:00"
 # 18100000 have been processed "2021-08-31 07:50:00", until_time="2021-08-31 08:10:00"
 
-start_year = 2002
-end_year = 2022
+start_year = 2000
+end_year = 2000
 day_time_string_1 = "-08-31 07:00:00"
-day_time_string_2 = "-08-31 09:00:00"
+day_time_string_2 = "-08-31 18:00:00"
 collector = "rrc00"
 recordType = "ribs"
 

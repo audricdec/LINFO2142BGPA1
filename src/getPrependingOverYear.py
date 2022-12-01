@@ -6,7 +6,7 @@ import csv
 # 18100000 have been processed "2021-08-31 07:50:00", until_time="2021-08-31 08:10:00"
 
 start_year = 2000
-end_year = 2000
+end_year = 2022
 day_time_string_1 = "-08-31 07:00:00"
 day_time_string_2 = "-08-31 18:00:00"
 collector = "rrc00"
@@ -27,6 +27,7 @@ for year in range(start_year, end_year+1):
         from_time=str(year)+day_time_string_1, until_time=str(year)+day_time_string_2,
         collectors=[collector],
         record_type=recordType,
+        filter="aspath _36040$"
     )
     route_count = 0 
     route_prepend = 0

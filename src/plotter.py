@@ -1,10 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy.signal import savgol_filter
 
 df = pd.read_csv('src/output/prepend_proportion_route-views.eqix_2002_2022.csv')
 row = df['year']
 column = df['prepend_count'] / df['route_count']
+
 print(df)
 print(column)
 
@@ -13,6 +15,13 @@ row2 = df2['year']
 column2 = df2['prepend_count'] / df2['route_count']
 print(df2)
 print(column2)
+
+# dfPropLength = pd.read_csv('src/output/prepend_proportion_rrc00_2000_2000.csv')
+# row3 = list(dfPropLength['prepend_lengths'][0])
+# column3 = list(dfPropLength['prepend_counts'][0])
+# print(dfPropLength)
+# print(row3)
+# print(column3)
 
 # def smooth(y, box_pts):
 #     box = np.ones(box_pts)/box_pts
@@ -24,13 +33,24 @@ plt.style.use('seaborn-whitegrid')
 plt.title('Proportion of STUB ASes doing prepending between 2002 and 2022',fontsize = 16)
 plt.xlabel('Years',fontsize = 12)
 plt.ylabel('Proportion of prepending',fontsize = 12)
-# plt.plot(row,smooth(column,3),label = 'route-views.eqix', marker='o')
-# plt.plot(row2,smooth(column2,3),label = 'rrc00', marker='o')
-plt.plot(row,column,label = 'route-views.eqix', marker='o')
-plt.plot(row2,column2,label = 'rrc00', marker='o')
+plt.plot(row,savgol_filter(column,15,5),label = 'route-views.eqix', marker='o')
+plt.plot(row2,savgol_filter(column2,15,5),label = 'rrc00', marker='o')
 plt.legend()
-plt.savefig('prepending.png',dpi = 100,format='png')
+plt.savefig('prependingSmooth.png',dpi = 100,format='png')
 plt.show()
+
+# plt.figure(figsize=(10,8))
+# plt.style.use('seaborn')
+# plt.title('STUB ASes doing prepending Length vs Count',fontsize = 16)
+# plt.bar(row3, column3)
+# #plt.xticks(range(1, max(row3)+1))
+# plt.xlabel('Length',fontsize = 12)
+# plt.ylabel('Count',fontsize = 12)
+# #plt.plot(row3,column3,label = 'route-views.eqix', marker='o')
+# plt.legend()
+# #plt.savefig('prepending2000LC.png',dpi = 100,format='png')
+# plt.show()
+
 #df.plot(kind='line', x='year', y= 'prepend_count')
 # years = np.arange(2009,2022+1)
 # p2009 = 118119 / 1463944

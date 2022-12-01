@@ -1,9 +1,9 @@
 Partie générale :
 
-- Checker longueur as path prepenpending 
-- Séparer IPV4 IPV6 ?
-- Checker plusieurs collectors ? rrc00
-- Checker only ases avec minimum 2 providers.
+- Checker longueur as path prepenpending => OK
+- Séparer IPV4 IPV6 ? 
+- Checker plusieurs collectors ? rrc00(Multi-hop) route-view.eqix(IXP)
+- Checker only ases avec minimum 2 providers. => OK to be tested
 
 Partie spécifique:
 

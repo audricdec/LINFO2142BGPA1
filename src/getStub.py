@@ -87,13 +87,13 @@ entries_count = 0
 for elem in stream:
     entries_count += 1
     as_path = elem.fields["as-path"].split(" ")
-    as_list.add(int(as_path[-1]))
+
+    if len(as_path) > 1:
+        if as_path[-1][0]!='{': 
+            as_list.add(int(as_path[-1]))
     
     if (entries_count % 100000) == 0 :
         print(f'{entries_count} entries have been processed')
-
-    if(entries_count > 100020):
-            break
 
 f1 = open("src/data/stubAS.txt","w")
 f2 = open("src/data/stubASProvider.txt","w")
@@ -120,8 +120,6 @@ for as_number in as_list:
 
     if (as_count % 1000) == 0 :
         print(f'{as_count} entries have been processed')
-
-    
 
 f1.close()
 f2.close()

@@ -1,5 +1,6 @@
-# Test file for pybgpstream.py
 #!/usr/bin/env python3
+#Test file for pybgpstream.py
+
 import pybgpstream
 
 stream = pybgpstream.BGPStream(

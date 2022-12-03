@@ -40,21 +40,64 @@ __email__ = "<bradley@caida.org>"
 # CALIFORNIA HAS NO OBLIGATIONS TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
 # ENHANCEMENTS, OR MODIFICATIONS.
 #
+import re
+import argparse
+import sys
 import json
 import requests
-import pybgpstream
 
 URL = "https://api.asrank.caida.org/v2/graphql"
 decoder = json.JSONDecoder()
 encoder = json.JSONEncoder()
 
+#method to print how to run script
+# def print_help():
+#     print (sys.argv[0],"-u as-rank.caida.org/api/v1")
+    
+######################################################################
+## Parameters
+######################################################################
+# parser = argparse.ArgumentParser()
+# parser.add_argument("asn",type=int,help="ASN we are looking up")
+# args = parser.parse_args()
+
+######################################################################
+## Main code
+######################################################################
+def main():
+    query = AsnQuery(63293)
+    request = requests.post(URL,json={'query':query})
+    if request.status_code == 200:
+        print(request.json())
+    else:
+        print("Query failed to run returned code of %d " % (request.status_code))
+
+######################################################################
+## Queries
+######################################################################
+
 def AsnQuery(asn): 
     return """{
         asn(asn:"%i") {
+            asn
+            asnName
+            rank
+            organization {
+                orgId
+                orgName
+            }
+            cliqueMember
+            seen
+            longitude
+            latitude
             cone {
                 numberAsns
                 numberPrefixes
                 numberAddresses
+            }
+            country {
+                iso
+                name
             }
             asnDegree {
                 provider
@@ -64,62 +107,11 @@ def AsnQuery(asn):
                 transit
                 sibling
             }
+            announcing {
+                numberPrefixes
+                numberAddresses
+            }
         }
     }""" % (asn)
-
-year = 2022
-day_time_string_1 = "-08-31 07:00:00"
-day_time_string_2 = "-08-31 09:00:00"
-collector = "rrc00"
-recordType = "ribs"
-
-print(f'Processing rib from {year}')
-
-stream = pybgpstream.BGPStream(
-    from_time=str(year)+day_time_string_1, until_time=str(year)+day_time_string_2,
-    collectors=[collector],
-    record_type=recordType,
-)
-
-as_list = set()
-entries_count = 0
-
-for elem in stream:
-    entries_count += 1
-    as_path = elem.fields["as-path"].split(" ")
-
-    if len(as_path) > 1:
-        if as_path[-1][0]!='{': 
-            as_list.add(int(as_path[-1]))
-    
-    if (entries_count % 100000) == 0 :
-        print(f'{entries_count} entries have been processed')
-
-f1 = open("src/data/stubAS.txt","w")
-f2 = open("src/data/stubASProvider.txt","w")
-
-print(str(len(as_list))+" AS have been found")
-as_count = 0
-
-for as_number in as_list:
-    as_count += 1
-    query = AsnQuery(as_number)
-    request = requests.post(URL,json={'query':query})
-    print(as_number)
-    
-    if request.status_code == 200:
-        datas = request.json()
-        if datas['data']['asn']['asnDegree']['customer'] == 0: # Check if ASN isSTUB
-            f1.write(f'{as_number}\n')
-            nb_provider = datas['data']['asn']['asnDegree']['provider']
-            if nb_provider > 1:
-                f2.write(f'{as_number},{nb_provider}\n')
-    
-    else:
-        print("Query failed to run returned code of %d " % (request.status_code))
-
-    if (as_count % 1000) == 0 :
-        print(f'{as_count} entries have been processed')
-
-f1.close()
-f2.close()
+#run the main method
+main()

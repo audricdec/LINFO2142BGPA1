@@ -5,9 +5,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-# 17800000 have been processed IPV4 & IPV6 "2022-08-31 07:50:00", until_time="2022-08-31 08:10:00"
-# 18100000 have been processed "2021-08-31 07:50:00", until_time="2021-08-31 08:10:00"
+#Loading stub AS based on https://asrank.caida.org/
+f_data = open("src/data/stubAS.txt", "r")
+stub_as = set()
 
+for as_stub in f_data:
+    stub_as.add(as_stub.rstrip("\n"))
+
+f_data.close()
+
+#Parameter
 start_year = 2000
 end_year = 2022
 day_time_string_1 = "-08-31 07:00:00"
